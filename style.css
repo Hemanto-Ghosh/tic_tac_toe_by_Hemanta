@@ -1,0 +1,79 @@
+body {
+    background-color: rgb(45, 45, 45);
+    color: rgb(218, 203, 203);
+    place-items: center;
+}
+
+#container {
+    height: 70vh;
+    width: 70vh;
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+}
+
+.boxes {
+    background-color: transparent;
+    color: white;
+    font-size: 15rem;
+    cursor: pointer;
+    border: none;
+}
+
+/* Add grid lines */
+#box3, #box4, #box5 {
+    border-top:  solid white;
+    border-bottom:  solid white;
+}
+#box1, #box4, #box7 {
+    border-right:  solid white;
+    border-left:  solid white;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px); /* blur everything behind */
+    background-color: rgba(0, 0, 0, 0.4); /* semi-transparent dark layer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-box {
+    background: white;
+    color: black;
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    font-size: 2rem;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#msgBoxButton {
+    height: 4rem;
+    width: 15rem;
+    font-size: 2rem;
+}
+
+#resetButton {
+    background-color: rgb(81, 233, 131);
+    color: white;
+    height: 3rem;
+    width: 10rem;
+    font-size: 3rem;
+    position: fixed;
+    bottom: 5%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: white;
+    border-radius: 5%;
+    border-style: solid;
+}
