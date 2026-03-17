@@ -6,11 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tic_tac_toe</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <h1>TIC TAC TOE</h1>
-    <select id="change_mode"></select>
+    <div id="scoreBoard">
+        <div id="scoreGroups">
+            <div class="scores" id="scoreX">
+                <div>X</div>
+                <div id="updtX"></div>
+            </div>
+            <div class="scores" id="scoreO">
+                <div>O</div>
+                <div id="updtO"></div>
+            </div>
+            <div class="scores" id="tie">
+                <div><i class="fa-solid fa-scale-balanced"></i></div>
+                <div id="updtTie"></div>
+            </div>
+        </div>
+        <!-- <select id="change_mode"></select> -->
+    </div>
     <div id="container">
         <button class="boxes" id="box0"></button>
         <button class="boxes" id="box1"></button>
@@ -21,13 +38,29 @@
         <button class="boxes" id="box6"></button>
         <button class="boxes" id="box7"></button>
         <button class="boxes" id="box8"></button>
+        <div id="winLine"></div>
     </div>
-    <button id="resetButton">Reset</button>
+    <div id="accessories">
+        <button id="newButton"><i class="fa-solid fa-arrows-rotate"></i></button>
+        <div class="toogleXNdO">
+            <input type="checkbox" id="toogle">
+            <label for="toogle" class="button"><i class="fa-solid fa-xmark"></i>
+                <i class="fa-solid fa-o"></i></i></label>
+        </div>
+        <button id="resetButton">
+            <i class="fa-solid fa-trash-can"></i>
+        </button>
+    </div>
     <div class="overlay" id="startOverlay">
         <div class="message-box">
-            Start the Game
+            Start the Game with
             <br><br>
-            <button id="msgBoxButton">START</button>
+            <button id="isTurnBtnBox">
+                <div class="isTurnBtn" id="isTurnOf"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <div class="isTurnBtn" id="isTurnOfX">X</div>
+                <div class="isTurnBtn" id="isTurnOfO">O</div>
+            </button>
+            <button id="continue"><i class="fa-solid fa-circle-chevron-right"></i></button>
         </div>
     </div>
     <script src="app.js"></script>
