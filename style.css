@@ -1,0 +1,369 @@
+body {
+    background-color: rgb(45, 45, 45);
+    color: rgb(218, 203, 203);
+    place-items: center;
+    font-family: cursive;
+}
+
+/* score board */
+#scoreBoard {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    /* separates left select and right scores */
+}
+
+#scoreGroups {
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+    /* space between X, O, Tie */
+}
+
+#scoreX {
+    margin-left: 3rem;
+    /* extra space to the right of X */
+}
+
+#scoreX,
+#scoreO,
+#tie {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 3rem;
+    height: 5rem;
+    width: 11rem;
+    border-radius: 999px;
+}
+
+
+#scoreX div:first-child,
+#scoreO div:first-child {
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#tie div:first-child {
+    width: 5rem;
+    text-align: center;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#scoreX div:last-child,
+#scoreO div:last-child,
+#tie div:last-child {
+    flex: 1;
+    /* take remaining space */
+    display: flex;
+    /* allow flex centering */
+    justify-content: center;
+}
+
+.scores {
+    background-color: #539e2d;
+    color: #f9fdfa;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+#container {
+    position: relative;
+    height: 50vh;
+    width: 50vh;
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+
+}
+
+.boxes {
+    background-color: transparent;
+    color: white;
+    font-size: 15rem;
+    cursor: pointer;
+    border: none;
+}
+
+/* Add grid lines */
+#box3,
+#box4,
+#box5 {
+    border-top: solid white;
+    border-bottom: solid white;
+}
+
+#box1,
+#box4,
+#box7 {
+    border-right: solid white;
+    border-left: solid white;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    /* blur everything behind */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* semi-transparent dark layer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-box {
+    background: white;
+    color: black;
+    padding: 3rem 3rem;
+    border-radius: 30px;
+    font-size: 2rem;
+    text-align: center;
+    place-items: center;
+    font-weight: bold;
+}
+
+#isTurnBtnBox {
+    background-color: chartreuse;
+    border-color: chartreuse;
+    height: 4rem;
+    width: 12rem;
+    border-style: solid;
+    display: flex;
+    border-radius: 50px;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+#isTurnOf {
+    background-color: transparent;
+    height: 6rem;
+    width: 6rem;
+    position: absolute;
+    transition: transform 0.4s ease;
+    font-size: 6.7rem;
+}
+
+.left {
+    transform: translateX(-2.6rem); /* over X */
+}
+.right {
+    transform: translateX(2.9rem);  /* over O */
+}
+
+#isTurnOfX, #isTurnOfO {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
+
+#continue {
+    position: absolute;
+    height: 6rem;
+    width: 6rem;
+    background-color: transparent;
+    color: #f9fdfa;
+    font-size: 6rem;
+    border-style: none;
+    bottom: 4rem;
+    right:4rem;
+    cursor: pointer;
+}
+
+#isTurnOfO,
+#isTurnOfX {
+    height: 5rem;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+.isTurnNow{
+    background-color: rgba(0, 0, 0, 0.3);
+    border-style: solid;
+    border-color: #305c1a;
+    color: #305c1a;
+}
+
+#winLine {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    /* line color */
+    height: 25px;
+    /* line thickness */
+    width: 0;
+    /* start as a dot */
+    border-radius: 20px;
+    transition: width 0.5s ease;
+    /* animate growth */
+}
+
+#accessories {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 20rem;
+    width: 100%;
+    /* same width as board */
+}
+
+#newButton {
+    background-color: transparent;
+    color: rgb(85, 153, 29);
+    height: 6rem;
+    width: 6rem;
+    font-size: 7rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: none;
+    border-radius: 20px;
+}
+
+.toogleXNdO {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  background-color: transparent;
+  border-style: solid;
+  width: 200px;
+  height: 100px;
+  border-radius: 200px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.25s;
+}
+
+.button::before {
+  position: absolute;
+  content: '';
+  background-color: #fff;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 200px;
+  border-style: solid;
+  margin: -0.7rem;
+  transition: 0.2s;
+}
+
+input:checked + .button::before {
+  transform: translateX(100px);
+  background-color: yellow;
+}
+
+.button .fa-xmark {
+    bottom: 0.5rem;
+    left: 1.3rem;
+    color: #c44a4a;
+}
+
+input:checked + .button .fa-xmark {
+  opacity: 0;
+}
+
+.button i {
+    position: absolute;
+    left: 2rem;
+    font-size: 5rem;
+}
+
+.button .fa-o {
+  position: absolute;
+  transition: 0.2s;
+  opacity: 0;
+  left: 8.7rem;
+  top: 2.3rem;
+  transform: translate(-1.5rem, -1.5rem);
+  pointer-events: none;
+}
+
+input:checked + .button i {
+  color: #004ca4;
+  opacity: 100%; /* show when checked */
+}
+
+input {
+  display: none;
+}
+
+#resetButton {
+    height: 6rem;
+    width: 6rem;
+    background-color: transparent;
+    color: #c44a4a;
+    font-size: 7rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    border-style: none;
+    border-radius: 20px;
+}
+
+/* Medium Mobile (376px - 414px) */
+@media (min-width: 340px){
+  #scoreGroups {
+    justify-content: space-around;
+  }
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-right: -28rem;
+  }
+  #scoreX {
+    margin-left: 0%;
+  }
+  #container {
+    height: 40rem;
+    width: 40rem;
+    margin-top: 16rem;
+    margin-left: 29rem;
+  }
+  .boxes { 
+    font-size: 9rem;
+  }
+  #accessories {
+    margin-left: 30rem;
+    margin-bottom: -7rem;
+  }
+
+  #winLine {
+    height: 1.3rem;
+  }
+
+  .button .fa-xmark {
+    bottom: 0.7rem;
+    left: 1rem;
+  }
+
+  .button .fa-o {
+    left: 8.6rem;
+    top: 2rem;
+  }
+
+  #scoreGroups {
+    display: flex;
+    justify-content: space-around;
+  }
+}
