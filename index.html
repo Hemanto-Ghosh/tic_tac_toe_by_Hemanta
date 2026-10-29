@@ -26,8 +26,8 @@
                 <div id="updtTie"></div>
             </div>
         </div>
-        <!-- <select id="change_mode"></select> -->
     </div>
+    <div id="containerBox">
     <div id="container">
         <button class="boxes" id="box0"></button>
         <button class="boxes" id="box1"></button>
@@ -39,14 +39,12 @@
         <button class="boxes" id="box7"></button>
         <button class="boxes" id="box8"></button>
         <div id="winLine"></div>
-    </div>
+    </div></div>
     <div id="accessories">
         <button id="newButton"><i class="fa-solid fa-arrows-rotate"></i></button>
-        <div class="toogleXNdO">
             <input type="checkbox" id="toogle">
             <label for="toogle" class="button"><i class="fa-solid fa-xmark"></i>
-                <i class="fa-solid fa-o"></i></i></label>
-        </div>
+                <i class="fa-solid fa-o"></i></label>
         <button id="resetButton">
             <i class="fa-solid fa-trash-can"></i>
         </button>
@@ -55,13 +53,14 @@
         <div class="message-box">
             Start the Game with
             <br><br>
-            <button id="isTurnBtnBox">
-                <div class="isTurnBtn" id="isTurnOf"><i class="fa-solid fa-magnifying-glass"></i></div>
-                <div class="isTurnBtn" id="isTurnOfX">X</div>
-                <div class="isTurnBtn" id="isTurnOfO">O</div>
-            </button>
-            <button id="continue"><i class="fa-solid fa-circle-chevron-right"></i></button>
+                <div id="radioBtnChoseturn">
+                <input type="radio" id="radioBtnX" name="choseTurn" value="1">
+                <label for="radioBtnX" class="radioLable">X</label>
+                <input type="radio" id="radioBtnO" name="choseTurn" value="0">
+                <label for="radioBtnO" class="radioLable">O</label>
+                </div>
         </div>
+        <button id="continue"><i class="fa-solid fa-circle-chevron-right"></i></button>
     </div>
     <script src="app.js"></script>
 </body>

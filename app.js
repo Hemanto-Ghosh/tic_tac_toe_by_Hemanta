@@ -2,30 +2,19 @@ const boxes = document.querySelectorAll(".boxes");
 let isTurnO = false;
 let suceed = false;
 const winnPatterns = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-let clkSquncLstIdx = null;
 let gameDrawn = false;
 let winPatrnDivs = [];
 
-function choseTurn(){
-    if(isTurnO === false){
-        document.getElementById("isTurnOf").classList.remove("left");
-        document.getElementById("isTurnOf").classList.add("right");
-        isTurnO = true;
-    }
-    else{
-        document.getElementById("isTurnOf").classList.remove("right");
-        document.getElementById("isTurnOf").classList.add("left");
-        isTurnO = false;
-    }
-    toogleXorO();
-};
-choseTurn();
-// for model UI overlay
-document.getElementById("isTurnBtnBox").addEventListener("click", choseTurn);
+document.querySelectorAll('input[name="choseTurn"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+        isTurnO = e.target.value === "0"; // true if O, false if X
+        toogleXorO();
+    });
+});
+
 document.getElementById("continue").addEventListener("click", () => {
     document.getElementById("startOverlay").style.display = "none";
 });
-document.getElementById("toogle").disabled=true;
 
 //game's logic
 let scoreX = 0;
@@ -38,6 +27,19 @@ const updateScoreboard = () => {
     document.getElementById("updtO").innerText = `${scoreO}`;
     document.getElementById("updtTie").innerText = `${scoreTie}`;
 };
+
+const triggerBorderPulse = (element) => {
+    if (!element) return;
+
+    // 1. Remove class to reset state
+    element.classList.remove('border-pulse');
+
+    // 2. Force reflow (Magic line to restart animation)
+    void element.offsetWidth;
+
+    // 3. Add the new class
+    element.classList.add('border-pulse');
+}
 
 boxes.forEach((box, index) => {  // click box
     box.addEventListener("click", () => {
@@ -52,7 +54,6 @@ boxes.forEach((box, index) => {  // click box
 
         box.disabled = true;
 
-        clkSquncLstIdx = index;
         toogleXorO();
         checkWinner();
     });
@@ -70,29 +71,39 @@ const checkWinner = () => {
                 suceed = true;
                 boxes.forEach((box) => box.disabled = true);
 
-                if (pos1Val === "X") scoreX++;
-                else scoreO++;
+                if (pos1Val === "X") {
+                    scoreX++; triggerBorderPulse(document.getElementById("scoreX"));
+                }
+                else { scoreO++; triggerBorderPulse(document.getElementById("scoreO")); }
 
                 updateScoreboard();
                 winPatrnDivs = [boxes[patterns[0]], boxes[patterns[1]], boxes[patterns[2]]];
                 drawLine();
+                toggleBlink(true);
             }
         }
     }
 
     if (!suceed && [...boxes].every(box => box.innerText !== "")) {
         scoreTie++;
-        boxes.forEach((box, idx) => {
-            if (idx !== clkSquncLstIdx) {
-                box.innerText = "";
-                box.disabled = false;
-            }
-        });
+        triggerBorderPulse(document.getElementById("tie"));
         updateScoreboard();
+        toggleBlink(true);
         gameDrawn = true;
         console.log("Game continues after draw, last move stays!");
     }
 
+};
+
+// for reset butn blink
+const resetBtn = document.getElementById("resetButton");
+
+const toggleBlink = (shouldBlink) => {
+    if (shouldBlink) {
+        resetBtn.classList.add("blinking");
+    } else {
+        resetBtn.classList.remove("blinking");
+    }
 };
 
 // Draw line 
@@ -135,29 +146,39 @@ function drawLine() {
 
 //for reset logic
 const reset = () => {
+    toggleBlink(false);
+    const line = document.getElementById("winLine");
+    line.style.display = "none";
+    line.style.width = "0px";
+
     boxes.forEach((box) => {
         box.innerText = "";
         box.disabled = false;
     });
     isTurnO = false;
     suceed = false;
-    clkSquncLstIdx = null;
     gameDrawn = false;
+    winPatrnDivs = [];
 
-    const line = document.getElementById("winLine");
-    line.style.width = "0px";
+    toogleXorO();
     console.log("Game reset!");
 };
 document.getElementById("resetButton").addEventListener("click", reset);
 //for toogling x and o
-function toogleXorO(){
-    if(isTurnO===false)
+function toogleXorO() {
+    if (isTurnO === false)
         document.getElementById("toogle").checked = false;
     else
         document.getElementById("toogle").checked = true;
 };
+document.getElementById("toogle").disabled = true;
 // for new game logic
 document.getElementById("newButton").addEventListener("click", () => {
     reset();
+
+    scoreX = 0;
+    scoreO = 0;
+    scoreTie = 0;
+    updateScoreboard();
     document.getElementById("startOverlay").style.display = "flex";
 });
